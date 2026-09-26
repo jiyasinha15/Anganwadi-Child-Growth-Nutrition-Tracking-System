@@ -15,11 +15,40 @@ export default function WorkerLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setError("");
 
-    // Demo worker login
+    const workers = JSON.parse(
+      localStorage.getItem("workerUsers") || "[]"
+    );
+
+    const worker = workers.find(
+      (user) =>
+        user.email === email &&
+        user.password === password
+    );
+
+    if (!worker) {
+      setError("Invalid email or password.");
+      return;
+    }
+
+    if (worker.status !== "approved") {
+      setError(
+        "Your registration is still pending Admin approval."
+      );
+      return;
+    }
+
+    localStorage.setItem("workerLoggedIn", "true");
+    localStorage.setItem(
+      "loggedInWorker",
+      JSON.stringify(worker)
+    );
+
     navigate("/worker");
   };
 
@@ -34,70 +63,45 @@ export default function WorkerLogin() {
         Back
       </button>
 
-      <form
-        className="role-login-card"
-        onSubmit={handleLogin}
-      >
+      <form className="role-login-card" onSubmit={handleLogin}>
 
         <div className="role-login-icon worker-icon">
           <UserRound size={32} />
         </div>
 
-        <h1>
-          Anganwadi Worker Login
-        </h1>
+        <h1>Anganwadi Worker Login</h1>
 
         <p>
           Login to manage child growth and nutrition records
         </p>
 
-
         <div className="form-group">
-
-          <label>
-            Worker Email
-          </label>
+          <label>Worker Email</label>
 
           <div className="login-input">
-
             <Mail size={17} />
 
             <input
               type="email"
               placeholder="Enter worker email"
               value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
-
           </div>
-
         </div>
 
-
         <div className="form-group">
-
-          <label>
-            Password
-          </label>
+          <label>Password</label>
 
           <div className="login-input">
-
             <LockKeyhole size={17} />
 
             <input
-              type={
-                showPassword
-                  ? "text"
-                  : "password"
-              }
+              type={showPassword ? "text" : "password"}
               placeholder="Enter password"
               value={password}
-              onChange={(e) =>
-                setPassword(e.target.value)
-              }
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
 
@@ -114,27 +118,52 @@ export default function WorkerLogin() {
                 <Eye size={17} />
               )}
             </button>
-
           </div>
-
         </div>
 
+        {error && (
+          <p
+            style={{
+              color: "#dc2626",
+              fontSize: "13px",
+              marginTop: "4px"
+            }}
+          >
+            {error}
+          </p>
+        )}
 
-        <button
-          type="submit"
-          className="login-button"
-        >
+        <button type="submit" className="login-button">
           Login as Worker
         </button>
 
+        <div
+          style={{
+            marginTop: "14px",
+            textAlign: "center"
+          }}
+        >
+          <span style={{ fontSize: "13px" }}>
+            New Anganwadi Worker?
+          </span>
 
-        <small>
-          Demo login — backend authentication
-          will be connected later.
-        </small>
+          <button
+            type="button"
+            onClick={() => navigate("/worker-register")}
+            style={{
+              border: "none",
+              background: "none",
+              color: "#15803d",
+              fontWeight: "600",
+              cursor: "pointer",
+              marginLeft: "5px"
+            }}
+          >
+            Register here
+          </button>
+        </div>
 
       </form>
-
     </div>
   );
 }

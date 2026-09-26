@@ -28,7 +28,7 @@ import AdminCentres from "./pages/AdminCentres";
 import AdminWorkers from "./pages/AdminWorkers";
 import AdminReports from "./pages/AdminReports";
 import AdminSettings from "./pages/AdminSettings";
-
+import WorkerRegister from "./pages/WorkerRegister";
 
 export default function App() {
 
@@ -143,6 +143,11 @@ export default function App() {
         <Route
           path="/admin/settings"
           element={<AdminSettings />}
+        />
+
+        <Route
+          path="/worker-register"
+          element={<WorkerRegister />}
         />
 
       </Route>
