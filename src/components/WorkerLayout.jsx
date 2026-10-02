@@ -54,7 +54,7 @@ export default function WorkerLayout() {
   ];
 
   return (
-    <div className="app">
+    <div className="app worker-app">
 
       <aside className="sidebar">
 

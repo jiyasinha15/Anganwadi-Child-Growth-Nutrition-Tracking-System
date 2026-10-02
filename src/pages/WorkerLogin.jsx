@@ -36,13 +36,6 @@ export default function WorkerLogin() {
       return;
     }
 
-    if (worker.status !== "approved") {
-      setError(
-        "Your registration is still pending Admin approval."
-      );
-      return;
-    }
-
     localStorage.setItem("workerLoggedIn", "true");
     localStorage.setItem(
       "loggedInWorker",

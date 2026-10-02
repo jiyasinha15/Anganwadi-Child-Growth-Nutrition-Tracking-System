@@ -7,7 +7,6 @@ import {
   Users,
   BarChart3,
   Settings,
-  ShieldCheck,
   LogOut
 } from "lucide-react";
 
@@ -17,7 +16,7 @@ export default function AdminLayout() {
   const menuItems = [
     {
       path: "/admin",
-      name: "Admin Dashboard",
+      name: "Dashboard",
       icon: LayoutDashboard
     },
     {
@@ -42,36 +41,37 @@ export default function AdminLayout() {
     }
   ];
 
+  const handleLogout = () => {
+    localStorage.removeItem("adminLoggedIn");
+    navigate("/");
+  };
+
   return (
     <div className="app">
 
+      {/* SIDEBAR */}
       <aside className="sidebar admin-sidebar">
 
         {/* BRAND */}
         <div className="brand">
-
           <div className="brand-icon">
             🛡️
           </div>
 
-          <div>
-            <strong>
-              Anganwadi
-            </strong>
-
-            <span>
-              Admin Portal
-            </span>
+          <div className="brand-text">
+            <strong>Anganwadi</strong>
+            <span>Admin Portal</span>
           </div>
-
         </div>
 
+        {/* NAVIGATION */}
+        <nav className="admin-nav">
 
-        {/* ADMIN NAVIGATION */}
-        <nav>
+          <div className="nav-heading">
+            ADMIN MENU
+          </div>
 
           {menuItems.map((item) => {
-
             const Icon = item.icon;
 
             return (
@@ -83,57 +83,50 @@ export default function AdminLayout() {
                   isActive ? "active" : ""
                 }
               >
-
                 <Icon size={19} />
-
-                <span>
-                  {item.name}
-                </span>
-
+                <span>{item.name}</span>
               </NavLink>
             );
-
           })}
 
         </nav>
 
+        {/* SIDEBAR BOTTOM */}
+        <div className="sidebar-bottom">
 
-        {/* LOGOUT */}
-        <button
-          className="logout"
-          onClick={() =>
-            navigate("/")
-          }
-        >
+          <div className="admin-user-mini">
+            <div className="mini-avatar">
+              AD
+            </div>
 
-          <LogOut size={18} />
+            <div>
+              <strong>Administrator</strong>
+              <small>System Admin</small>
+            </div>
+          </div>
 
-          <span>
-            Logout
-          </span>
+          <button
+            className="logout"
+            onClick={handleLogout}
+          >
+            <LogOut size={18} />
+            <span>Logout</span>
+          </button>
 
-        </button>
+        </div>
 
       </aside>
-
 
       {/* MAIN */}
       <main className="main">
 
+        {/* TOPBAR */}
         <header className="topbar">
 
-          <div>
-
-            <h2>
-              Anganwadi Management System
-            </h2>
-
-            <p>
-              Administrator Portal
-            </p>
-
+          <div className="topbar-title">
+            <h2>Anganwadi Management System</h2>
+            <p>Administrator Portal</p>
           </div>
-
 
           <div className="worker">
 
@@ -142,22 +135,15 @@ export default function AdminLayout() {
             </span>
 
             <div>
-
-              <b>
-                Administrator
-              </b>
-
-              <small>
-                System Admin
-              </small>
-
+              <b>Administrator</b>
+              <small>System Admin</small>
             </div>
 
           </div>
 
         </header>
 
-
+        {/* PAGE CONTENT */}
         <section className="content">
           <Outlet />
         </section>

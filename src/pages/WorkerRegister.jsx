@@ -64,9 +64,6 @@ export default function WorkerRegister() {
       centre: form.centre,
       password: form.password,
 
-      // Important:
-      // Worker cannot login until Admin approves.
-      status: "pending"
     };
 
     workers.push(newWorker);
@@ -245,8 +242,8 @@ export default function WorkerRegister() {
         </button>
 
         <small>
-          Your account will remain pending until it is
-          approved by an Admin.
+          Registration successful. You can now login using
+          your registered email and password.
         </small>
 
       </form>
