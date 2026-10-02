@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Save } from "lucide-react";
-
+import { ArrowLeft, Save, UserRound, Activity } from "lucide-react";
 import { calculateBMI } from "../data";
 
 export default function RegisterChild() {
@@ -15,9 +14,7 @@ export default function RegisterChild() {
     phone: "",
     center: "",
     address: "",
-    date: new Date()
-      .toISOString()
-      .split("T")[0],
+    date: new Date().toISOString().split("T")[0],
     height: "",
     weight: ""
   });
@@ -31,10 +28,7 @@ export default function RegisterChild() {
     }));
   };
 
-  const bmi = calculateBMI(
-    form.weight,
-    form.height
-  );
+  const bmi = calculateBMI(form.weight, form.height);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,7 +41,6 @@ export default function RegisterChild() {
       phone: form.phone,
       center: form.center,
       address: form.address,
-
       measurements: [
         {
           date: form.date,
@@ -58,65 +51,54 @@ export default function RegisterChild() {
       ]
     };
 
-    console.log(
-      "New child registration:",
-      childData
-    );
+    console.log("New child registration:", childData);
 
-    alert(
-      `${form.name} registered successfully!`
-    );
+    alert(`${form.name} registered successfully!`);
 
     navigate("/children");
   };
 
   return (
-    <div className="register-page">
+    <div className="worker-register-page">
 
-      {/* HEADER */}
-      <div className="page-header">
+      <div className="worker-page-header">
 
         <div>
-
           <button
             type="button"
-            className="back-button"
-            onClick={() =>
-              navigate("/children")
-            }
+            className="worker-back-btn"
+            onClick={() => navigate("/children")}
           >
             <ArrowLeft size={18} />
             Back to Children
           </button>
 
-          <h1>
-            Register Child
-          </h1>
+          <h1>Register Child</h1>
 
           <p>
             Add a new child and initial growth record
           </p>
-
         </div>
 
       </div>
 
-
       <form
-        className="registration-form"
+        className="worker-registration-form"
         onSubmit={handleSubmit}
       >
 
         {/* CHILD DETAILS */}
-        <div className="dashboard-card">
 
-          <div className="card-header">
+        <div className="worker-form-card">
+
+          <div className="worker-form-heading">
+
+            <div className="worker-form-icon">
+              <UserRound size={20} />
+            </div>
 
             <div>
-              <h3>
-                Child Details
-              </h3>
-
+              <h3>Child Details</h3>
               <p>
                 Enter the child's basic information
               </p>
@@ -124,17 +106,12 @@ export default function RegisterChild() {
 
           </div>
 
+          <div className="worker-form-grid">
 
-          <div className="form-grid">
-
-            <div className="form-group">
-
-              <label htmlFor="name">
-                Child Name
-              </label>
+            <div className="worker-form-group">
+              <label>Child Name</label>
 
               <input
-                id="name"
                 name="name"
                 type="text"
                 placeholder="Enter child name"
@@ -142,71 +119,40 @@ export default function RegisterChild() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
-
-            <div className="form-group">
-
-              <label htmlFor="dob">
-                Date of Birth
-              </label>
+            <div className="worker-form-group">
+              <label>Date of Birth</label>
 
               <input
-                id="dob"
                 name="dob"
                 type="date"
                 value={form.dob}
                 onChange={handleChange}
                 required
               />
-
             </div>
 
-
-            <div className="form-group">
-
-              <label htmlFor="gender">
-                Gender
-              </label>
+            <div className="worker-form-group">
+              <label>Gender</label>
 
               <select
-                id="gender"
                 name="gender"
                 value={form.gender}
                 onChange={handleChange}
                 required
               >
-
-                <option value="">
-                  Select gender
-                </option>
-
-                <option value="Male">
-                  Male
-                </option>
-
-                <option value="Female">
-                  Female
-                </option>
-
-                <option value="Other">
-                  Other
-                </option>
-
+                <option value="">Select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
               </select>
-
             </div>
 
-
-            <div className="form-group">
-
-              <label htmlFor="guardian">
-                Guardian Name
-              </label>
+            <div className="worker-form-group">
+              <label>Guardian Name</label>
 
               <input
-                id="guardian"
                 name="guardian"
                 type="text"
                 placeholder="Enter guardian name"
@@ -214,18 +160,12 @@ export default function RegisterChild() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
-
-            <div className="form-group">
-
-              <label htmlFor="phone">
-                Phone Number
-              </label>
+            <div className="worker-form-group">
+              <label>Phone Number</label>
 
               <input
-                id="phone"
                 name="phone"
                 type="tel"
                 placeholder="Enter phone number"
@@ -233,53 +173,34 @@ export default function RegisterChild() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
-
-            <div className="form-group">
-
-              <label htmlFor="center">
-                Anganwadi Centre
-              </label>
+            <div className="worker-form-group">
+              <label>Anganwadi Centre</label>
 
               <select
-                id="center"
                 name="center"
                 value={form.center}
                 onChange={handleChange}
                 required
               >
-
-                <option value="">
-                  Select centre
-                </option>
-
+                <option value="">Select centre</option>
                 <option value="Anganwadi Centre - 01">
                   Anganwadi Centre - 01
                 </option>
-
                 <option value="Anganwadi Centre - 02">
                   Anganwadi Centre - 02
                 </option>
-
                 <option value="Anganwadi Centre - 03">
                   Anganwadi Centre - 03
                 </option>
-
               </select>
-
             </div>
 
-
-            <div className="form-group full-width">
-
-              <label htmlFor="address">
-                Address
-              </label>
+            <div className="worker-form-group worker-full-width">
+              <label>Address</label>
 
               <textarea
-                id="address"
                 name="address"
                 placeholder="Enter address"
                 rows="3"
@@ -287,24 +208,24 @@ export default function RegisterChild() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
           </div>
-
         </div>
 
 
-        {/* INITIAL GROWTH */}
-        <div className="dashboard-card">
+        {/* GROWTH */}
 
-          <div className="card-header">
+        <div className="worker-form-card">
+
+          <div className="worker-form-heading">
+
+            <div className="worker-form-icon">
+              <Activity size={20} />
+            </div>
 
             <div>
-              <h3>
-                Initial Growth Record
-              </h3>
-
+              <h3>Initial Growth Record</h3>
               <p>
                 Enter the latest height and weight
               </p>
@@ -312,35 +233,24 @@ export default function RegisterChild() {
 
           </div>
 
+          <div className="worker-form-grid">
 
-          <div className="form-grid">
-
-            <div className="form-group">
-
-              <label htmlFor="date">
-                Measurement Date
-              </label>
+            <div className="worker-form-group">
+              <label>Measurement Date</label>
 
               <input
-                id="date"
                 name="date"
                 type="date"
                 value={form.date}
                 onChange={handleChange}
                 required
               />
-
             </div>
 
-
-            <div className="form-group">
-
-              <label htmlFor="height">
-                Height (cm)
-              </label>
+            <div className="worker-form-group">
+              <label>Height (cm)</label>
 
               <input
-                id="height"
                 name="height"
                 type="number"
                 min="1"
@@ -350,18 +260,12 @@ export default function RegisterChild() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
-
-            <div className="form-group">
-
-              <label htmlFor="weight">
-                Weight (kg)
-              </label>
+            <div className="worker-form-group">
+              <label>Weight (kg)</label>
 
               <input
-                id="weight"
                 name="weight"
                 type="number"
                 min="0.1"
@@ -371,59 +275,51 @@ export default function RegisterChild() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
           </div>
 
 
-          {/* BMI */}
-          <div className="calculated-bmi">
+          <div className="worker-bmi-box">
 
-            <span>
-              Calculated BMI
-            </span>
+            <div>
+              <span>Calculated BMI</span>
 
-            <strong>
-              {bmi ?? "--"}
-            </strong>
+              <strong>
+                {bmi ?? "--"}
+              </strong>
+            </div>
 
             <small>
-              BMI is calculated automatically from
-              the entered height and weight.
+              BMI is calculated automatically from the
+              entered height and weight.
             </small>
 
           </div>
 
-
-          <p className="info-note">
-
-            For children, BMI should be interpreted
-            using age- and sex-specific BMI-for-age
-            information.
-
-          </p>
+          <div className="worker-info-note">
+            For children, BMI should be interpreted using
+            age- and sex-specific BMI-for-age information.
+          </div>
 
         </div>
 
 
         {/* ACTIONS */}
-        <div className="form-actions">
+
+        <div className="worker-form-actions">
 
           <button
             type="button"
-            className="secondary"
-            onClick={() =>
-              navigate("/children")
-            }
+            className="worker-cancel-btn"
+            onClick={() => navigate("/children")}
           >
             Cancel
           </button>
 
-
           <button
             type="submit"
-            className="primary"
+            className="worker-save-btn"
           >
             <Save size={18} />
             Save Child

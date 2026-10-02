@@ -53,36 +53,31 @@ export default function WorkerLayout() {
     }
   ];
 
+  const handleLogout = () => {
+    localStorage.removeItem("workerLoggedIn");
+    localStorage.removeItem("loggedInWorker");
+    navigate("/");
+  };
+
   return (
     <div className="app worker-app">
 
+      {/* SIDEBAR */}
       <aside className="sidebar">
 
-        {/* BRAND */}
         <div className="brand">
-
           <div className="brand-icon">
             🌿
           </div>
 
           <div>
-            <strong>
-              Anganwadi
-            </strong>
-
-            <span>
-              Worker Portal
-            </span>
+            <strong>Anganwadi</strong>
+            <span>Worker Portal</span>
           </div>
-
         </div>
 
-
-        {/* NAVIGATION */}
-        <nav>
-
+        <nav className="worker-nav">
           {menuItems.map((item) => {
-
             const Icon = item.icon;
 
             return (
@@ -95,50 +90,31 @@ export default function WorkerLayout() {
                 }
               >
                 <Icon size={19} />
-                <span>
-                  {item.name}
-                </span>
+                <span>{item.name}</span>
               </NavLink>
             );
-
           })}
-
         </nav>
 
-
-        {/* LOGOUT */}
         <button
           className="logout"
-          onClick={() =>
-            navigate("/")
-          }
+          onClick={handleLogout}
         >
           <LogOut size={18} />
-          <span>
-            Logout
-          </span>
+          <span>Logout</span>
         </button>
 
       </aside>
-
 
       {/* MAIN */}
       <main className="main">
 
         <header className="topbar">
 
-          <div>
-
-            <h2>
-              Child Growth & Nutrition Tracking
-            </h2>
-
-            <p>
-              Anganwadi Worker Portal
-            </p>
-
+          <div className="topbar-title">
+            <h2>Child Growth & Nutrition Tracking</h2>
+            <p>Anganwadi Worker Portal</p>
           </div>
-
 
           <div className="worker">
 
@@ -147,21 +123,13 @@ export default function WorkerLayout() {
             </span>
 
             <div>
-
-              <b>
-                Anganwadi Worker
-              </b>
-
-              <small>
-                Centre - 01
-              </small>
-
+              <b>Anganwadi Worker</b>
+              <small>Centre - 01</small>
             </div>
 
           </div>
 
         </header>
-
 
         <section className="content">
           <Outlet />

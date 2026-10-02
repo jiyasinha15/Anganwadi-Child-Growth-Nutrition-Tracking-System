@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  Search,
-  Eye,
-  Plus,
-  Users
-} from "lucide-react";
+import { Search, Eye, Plus, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -15,7 +10,6 @@ import {
 
 export default function Children() {
   const navigate = useNavigate();
-
   const [search, setSearch] = useState("");
 
   const filteredChildren = children.filter((child) => {
@@ -26,285 +20,161 @@ export default function Children() {
       ${child.gender}
     `.toLowerCase();
 
-    return text.includes(
-      search.toLowerCase()
-    );
+    return text.includes(search.toLowerCase());
   });
 
   return (
-    <div className="children-page">
+    <div className="worker-children-page">
 
-      {/* HEADER */}
-      <div className="page-header">
-
+      <div className="worker-page-header">
         <div>
-          <h1>
-            Children
-          </h1>
-
+          <h1>Children</h1>
           <p>
             Manage registered children and their growth records
           </p>
         </div>
 
-
         <button
-          className="primary"
-          onClick={() =>
-            navigate("/children/new")
-          }
+          className="worker-primary-btn"
+          onClick={() => navigate("/children/new")}
         >
           <Plus size={18} />
           Register Child
         </button>
-
       </div>
 
-
-      {/* SUMMARY */}
-      <div className="stats-grid">
-
-        <div className="report-stat">
-
-          <div className="stat-icon">
+      <div className="worker-children-summary">
+        <div className="worker-summary-card">
+          <div className="worker-summary-icon">
             <Users size={22} />
           </div>
 
           <div>
-            <span>
-              Registered Children
-            </span>
-
-            <strong>
-              {children.length}
-            </strong>
+            <span>Registered Children</span>
+            <strong>{children.length}</strong>
+            <small>Active child records</small>
           </div>
-
         </div>
-
       </div>
 
-
-      {/* SEARCH */}
-      <div className="search-box">
-
+      <div className="worker-search">
         <Search size={19} />
 
         <input
           type="text"
           placeholder="Search by child name, guardian or centre..."
           value={search}
-          onChange={(e) =>
-            setSearch(e.target.value)
-          }
+          onChange={(e) => setSearch(e.target.value)}
         />
-
       </div>
 
+      <div className="worker-content-card">
 
-      {/* CHILDREN TABLE */}
-      <div className="dashboard-card">
-
-        <div className="card-header">
-
+        <div className="worker-card-heading">
           <div>
-            <h3>
-              Registered Children
-            </h3>
-
-            <p>
-              {filteredChildren.length} children found
-            </p>
+            <h3>Registered Children</h3>
+            <p>{filteredChildren.length} children found</p>
           </div>
-
         </div>
 
-
-        <div className="table-container">
-
-          <table>
+        <div className="worker-table-wrapper">
+          <table className="worker-table">
 
             <thead>
-
               <tr>
-                <th>
-                  Child
-                </th>
-
-                <th>
-                  Gender
-                </th>
-
-                <th>
-                  Guardian
-                </th>
-
-                <th>
-                  Centre
-                </th>
-
-                <th>
-                  Height
-                </th>
-
-                <th>
-                  Weight
-                </th>
-
-                <th>
-                  BMI
-                </th>
-
-                <th>
-                  Action
-                </th>
+                <th>Child</th>
+                <th>Gender</th>
+                <th>Guardian</th>
+                <th>Centre</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>BMI</th>
+                <th>Action</th>
               </tr>
-
             </thead>
 
-
             <tbody>
-
               {filteredChildren.map((child) => {
-
-                const latest =
-                  getLatestMeasurement(child);
-
-                const bmi =
-                  getLatestBMI(child);
+                const latest = getLatestMeasurement(child);
+                const bmi = getLatestBMI(child);
 
                 return (
                   <tr key={child.id}>
 
-                    {/* CHILD */}
                     <td>
+                      <div className="worker-table-child">
 
-                      <div className="table-child">
-
-                        <div className="child-avatar">
+                        <div className="worker-table-avatar">
                           {child.name.charAt(0)}
                         </div>
 
                         <div>
-
-                          <strong>
-                            {child.name}
-                          </strong>
-
-                          <small>
-                            DOB: {child.dob}
-                          </small>
-
+                          <strong>{child.name}</strong>
+                          <small>DOB: {child.dob}</small>
                         </div>
 
                       </div>
-
                     </td>
 
+                    <td>{child.gender}</td>
 
-                    {/* GENDER */}
-                    <td>
-                      {child.gender}
-                    </td>
+                    <td>{child.guardian}</td>
 
+                    <td>{child.center}</td>
 
-                    {/* GUARDIAN */}
-                    <td>
-                      {child.guardian}
-                    </td>
-
-
-                    {/* CENTRE */}
-                    <td>
-                      {child.center}
-                    </td>
-
-
-                    {/* HEIGHT */}
                     <td>
                       {latest?.height ?? "--"} cm
                     </td>
 
-
-                    {/* WEIGHT */}
                     <td>
                       {latest?.weight ?? "--"} kg
                     </td>
 
-
-                    {/* BMI */}
                     <td>
-
-                      <span className="bmi-badge">
+                      <span className="worker-bmi-badge">
                         {bmi ?? "--"}
                       </span>
-
                     </td>
 
-
-                    {/* ACTION */}
                     <td>
-
                       <button
-                        className="icon-button"
+                        className="worker-view-btn"
                         title="View Child"
                         onClick={() =>
-                          navigate(
-                            `/children/${child.id}`
-                          )
+                          navigate(`/children/${child.id}`)
                         }
                       >
-                        <Eye size={18} />
+                        <Eye size={17} />
                       </button>
-
                     </td>
 
                   </tr>
                 );
-
               })}
 
-
-              {/* NO RESULTS */}
               {filteredChildren.length === 0 && (
-
                 <tr>
-
                   <td
                     colSpan="8"
-                    className="empty-state"
+                    className="worker-empty-state"
                   >
-
-                    <h3>
-                      No children found
-                    </h3>
-
+                    <h3>No children found</h3>
                     <p>
                       Try searching with another name,
                       guardian or centre.
                     </p>
-
                   </td>
-
                 </tr>
-
               )}
 
             </tbody>
-
           </table>
-
         </div>
-
       </div>
 
-
-      {/* INFORMATION */}
-      <div className="info-note">
-
+      <div className="worker-info-note">
         Select the eye icon to open a child's complete
         profile, growth history and BMI records.
-
       </div>
 
     </div>

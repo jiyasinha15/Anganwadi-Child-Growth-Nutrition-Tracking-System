@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
 import {
   ArrowLeft,
   User,
@@ -25,11 +26,11 @@ export default function ChildProfile() {
 
   if (!child) {
     return (
-      <div className="dashboard-card empty-state">
+      <div className="worker-content-card worker-empty-profile">
         <h2>Child not found</h2>
 
         <button
-          className="primary"
+          className="worker-primary-btn"
           onClick={() => navigate("/children")}
         >
           Back to Children
@@ -41,33 +42,27 @@ export default function ChildProfile() {
   const latest = getLatestMeasurement(child);
 
   const latestBMI = latest
-    ? calculateBMI(
-        latest.weight,
-        latest.height
-      )
+    ? calculateBMI(latest.weight, latest.height)
     : null;
 
   return (
-    <div className="child-profile-page">
+    <div className="worker-profile-page">
 
       {/* HEADER */}
-      <div className="page-header">
+
+      <div className="worker-page-header">
 
         <div>
 
           <button
-            className="back-button"
-            onClick={() =>
-              navigate("/children")
-            }
+            className="worker-back-btn"
+            onClick={() => navigate("/children")}
           >
             <ArrowLeft size={18} />
             Back to Children
           </button>
 
-          <h1>
-            {child.name}
-          </h1>
+          <h1>{child.name}</h1>
 
           <p>
             Child profile and growth records
@@ -75,13 +70,10 @@ export default function ChildProfile() {
 
         </div>
 
-
         <button
-          className="primary"
+          className="worker-primary-btn"
           onClick={() =>
-            navigate(
-              `/children/${child.id}/measurement`
-            )
+            navigate(`/children/${child.id}/measurement`)
           }
         >
           <Plus size={18} />
@@ -91,60 +83,45 @@ export default function ChildProfile() {
       </div>
 
 
-      {/* BASIC PROFILE */}
-      <div className="profile-card">
+      {/* PROFILE */}
 
-        <div className="profile-avatar">
+      <div className="worker-profile-card">
+
+        <div className="worker-profile-avatar">
           {child.name.charAt(0)}
         </div>
 
+        <div className="worker-profile-main">
 
-        <div className="profile-main">
+          <div className="worker-profile-title">
+            <div>
+              <h2>{child.name}</h2>
+              <span>{child.gender}</span>
+            </div>
+          </div>
 
-          <h2>
-            {child.name}
-          </h2>
-
-          <span>
-            {child.gender}
-          </span>
-
-
-          <div className="profile-details">
+          <div className="worker-profile-details">
 
             <div>
               <Calendar size={17} />
-
-              <span>
-                DOB: {child.dob}
-              </span>
+              <span>DOB: {child.dob}</span>
             </div>
-
 
             <div>
               <Phone size={17} />
-
-              <span>
-                {child.phone}
-              </span>
+              <span>{child.phone}</span>
             </div>
-
 
             <div>
               <User size={17} />
-
               <span>
                 Guardian: {child.guardian}
               </span>
             </div>
 
-
             <div>
               <MapPin size={17} />
-
-              <span>
-                {child.address}
-              </span>
+              <span>{child.address}</span>
             </div>
 
           </div>
@@ -155,100 +132,75 @@ export default function ChildProfile() {
 
 
       {/* LATEST GROWTH */}
-      <div className="dashboard-card">
 
-        <div className="card-header">
+      <div className="worker-content-card">
+
+        <div className="worker-card-heading">
 
           <div>
-            <h3>
-              Latest Growth Record
-            </h3>
-
+            <h3>Latest Growth Record</h3>
             <p>
               Most recent height and weight measurement
             </p>
           </div>
 
           {latest && (
-            <span>
+            <span className="worker-date-badge">
               {latest.date}
             </span>
           )}
 
         </div>
 
+        <div className="worker-growth-stats">
 
-        <div className="growth-stats">
-
-          <div className="growth-stat">
-
-            <span>
-              Height
-            </span>
-
+          <div>
+            <span>Height</span>
             <strong>
               {latest?.height ?? "--"} cm
             </strong>
-
           </div>
 
-
-          <div className="growth-stat">
-
-            <span>
-              Weight
-            </span>
-
+          <div>
+            <span>Weight</span>
             <strong>
               {latest?.weight ?? "--"} kg
             </strong>
-
           </div>
 
-
-          <div className="growth-stat">
-
-            <span>
-              BMI
-            </span>
-
+          <div>
+            <span>BMI</span>
             <strong>
               {latestBMI ?? "--"}
             </strong>
-
           </div>
 
         </div>
 
-
-        <p className="info-note">
-          BMI is calculated from the recorded height
-          and weight. For children, BMI should be
-          interpreted using age- and sex-specific
-          BMI-for-age information.
-        </p>
+        <div className="worker-info-note">
+          BMI is calculated from the recorded height and
+          weight. For children, BMI should be interpreted
+          using age- and sex-specific BMI-for-age information.
+        </div>
 
       </div>
 
 
-      {/* MEASUREMENT HISTORY */}
-      <div className="dashboard-card">
+      {/* HISTORY */}
 
-        <div className="card-header">
+      <div className="worker-content-card">
+
+        <div className="worker-card-heading">
 
           <div>
-            <h3>
-              Measurement History
-            </h3>
-
+            <h3>Measurement History</h3>
             <p>
               Complete height, weight and BMI history
             </p>
           </div>
 
-
           <button
-            className="primary"
+            className="worker-primary-btn small"
             onClick={() =>
               navigate(
                 `/children/${child.id}/measurement`
@@ -261,33 +213,18 @@ export default function ChildProfile() {
 
         </div>
 
+        <div className="worker-table-wrapper">
 
-        <div className="table-container">
-
-          <table>
+          <table className="worker-table">
 
             <thead>
-
               <tr>
-                <th>
-                  Date
-                </th>
-
-                <th>
-                  Height
-                </th>
-
-                <th>
-                  Weight
-                </th>
-
-                <th>
-                  BMI
-                </th>
+                <th>Date</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>BMI</th>
               </tr>
-
             </thead>
-
 
             <tbody>
 
@@ -296,20 +233,16 @@ export default function ChildProfile() {
                 .reverse()
                 .map((measurement, index) => {
 
-                  const bmi =
-                    calculateBMI(
-                      measurement.weight,
-                      measurement.height
-                    );
+                  const bmi = calculateBMI(
+                    measurement.weight,
+                    measurement.height
+                  );
 
                   return (
                     <tr
                       key={`${measurement.date}-${index}`}
                     >
-
-                      <td>
-                        {measurement.date}
-                      </td>
+                      <td>{measurement.date}</td>
 
                       <td>
                         {measurement.height} cm
@@ -320,14 +253,12 @@ export default function ChildProfile() {
                       </td>
 
                       <td>
-                        <span className="bmi-badge">
+                        <span className="worker-bmi-badge">
                           {bmi}
                         </span>
                       </td>
-
                     </tr>
                   );
-
                 })}
 
             </tbody>
@@ -340,15 +271,13 @@ export default function ChildProfile() {
 
 
       {/* CHILD INFORMATION */}
-      <div className="dashboard-card">
 
-        <div className="card-header">
+      <div className="worker-content-card">
+
+        <div className="worker-card-heading">
 
           <div>
-            <h3>
-              Child Information
-            </h3>
-
+            <h3>Child Information</h3>
             <p>
               Registered profile information
             </p>
@@ -356,72 +285,36 @@ export default function ChildProfile() {
 
         </div>
 
-
-        <div className="system-info">
+        <div className="worker-system-info">
 
           <div>
-            <span>
-              Child Name
-            </span>
-
-            <strong>
-              {child.name}
-            </strong>
+            <span>Child Name</span>
+            <strong>{child.name}</strong>
           </div>
 
-
           <div>
-            <span>
-              Date of Birth
-            </span>
-
-            <strong>
-              {child.dob}
-            </strong>
+            <span>Date of Birth</span>
+            <strong>{child.dob}</strong>
           </div>
 
-
           <div>
-            <span>
-              Gender
-            </span>
-
-            <strong>
-              {child.gender}
-            </strong>
+            <span>Gender</span>
+            <strong>{child.gender}</strong>
           </div>
 
-
           <div>
-            <span>
-              Guardian
-            </span>
-
-            <strong>
-              {child.guardian}
-            </strong>
+            <span>Guardian</span>
+            <strong>{child.guardian}</strong>
           </div>
 
-
           <div>
-            <span>
-              Phone
-            </span>
-
-            <strong>
-              {child.phone}
-            </strong>
+            <span>Phone</span>
+            <strong>{child.phone}</strong>
           </div>
 
-
           <div>
-            <span>
-              Anganwadi Centre
-            </span>
-
-            <strong>
-              {child.center}
-            </strong>
+            <span>Anganwadi Centre</span>
+            <strong>{child.center}</strong>
           </div>
 
         </div>

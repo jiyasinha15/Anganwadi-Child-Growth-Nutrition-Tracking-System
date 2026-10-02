@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
 import {
   Users,
   Activity,
@@ -17,7 +18,6 @@ import {
 } from "../data";
 
 import StatCard from "../components/StatCard";
-import BMICard from "../components/BMICard";
 
 export default function WorkerDashboard() {
   const navigate = useNavigate();
@@ -31,15 +31,13 @@ export default function WorkerDashboard() {
   );
 
   return (
-    <div className="dashboard">
+    <div className="worker-dashboard">
 
-      {/* HEADER */}
-      <div className="page-header">
+      {/* PAGE HEADER */}
+      <div className="dashboard-header">
 
         <div>
-          <h1>
-            Worker Dashboard
-          </h1>
+          <h1>Worker Dashboard</h1>
 
           <p>
             Welcome to Anganwadi Worker Portal
@@ -47,10 +45,8 @@ export default function WorkerDashboard() {
         </div>
 
         <button
-          className="primary"
-          onClick={() =>
-            navigate("/children/new")
-          }
+          className="dashboard-primary"
+          onClick={() => navigate("/children/new")}
         >
           <Plus size={18} />
           Register Child
@@ -59,8 +55,8 @@ export default function WorkerDashboard() {
       </div>
 
 
-      {/* STATS */}
-      <div className="stats-grid">
+      {/* STAT CARDS */}
+      <div className="dashboard-stats">
 
         <StatCard
           icon={<Users size={22} />}
@@ -94,14 +90,12 @@ export default function WorkerDashboard() {
 
 
       {/* QUICK ACTIONS */}
-      <div className="dashboard-card">
+      <div className="worker-card">
 
-        <div className="card-header">
+        <div className="worker-card-header">
 
           <div>
-            <h3>
-              Quick Actions
-            </h3>
+            <h3>Quick Actions</h3>
 
             <p>
               Manage child records quickly
@@ -111,65 +105,45 @@ export default function WorkerDashboard() {
         </div>
 
 
-        <div className="quick-actions">
+        <div className="worker-quick-actions">
 
           <button
-            onClick={() =>
-              navigate("/children/new")
-            }
+            onClick={() => navigate("/children/new")}
           >
-            <Baby size={22} />
-            <span>
-              Register Child
-            </span>
+            <Baby size={21} />
+            <span>Register Child</span>
           </button>
 
 
           <button
-            onClick={() =>
-              navigate("/growth")
-            }
+            onClick={() => navigate("/growth")}
           >
-            <Activity size={22} />
-            <span>
-              Growth Monitoring
-            </span>
+            <Activity size={21} />
+            <span>Growth Monitoring</span>
           </button>
 
 
           <button
-            onClick={() =>
-              navigate("/nutrition")
-            }
+            onClick={() => navigate("/nutrition")}
           >
-            <Apple size={22} />
-            <span>
-              Nutrition
-            </span>
+            <Apple size={21} />
+            <span>Nutrition</span>
           </button>
 
 
           <button
-            onClick={() =>
-              navigate("/followups")
-            }
+            onClick={() => navigate("/followups")}
           >
-            <ClipboardCheck size={22} />
-            <span>
-              Follow-ups
-            </span>
+            <ClipboardCheck size={21} />
+            <span>Follow-ups</span>
           </button>
 
 
           <button
-            onClick={() =>
-              navigate("/reports")
-            }
+            onClick={() => navigate("/reports")}
           >
-            <BarChart3 size={22} />
-            <span>
-              Reports
-            </span>
+            <BarChart3 size={21} />
+            <span>Reports</span>
           </button>
 
         </div>
@@ -177,15 +151,13 @@ export default function WorkerDashboard() {
       </div>
 
 
-      {/* CHILDREN */}
-      <div className="dashboard-card">
+      {/* RECENT CHILDREN */}
+      <div className="worker-card">
 
-        <div className="card-header">
+        <div className="worker-card-header">
 
           <div>
-            <h3>
-              Recent Children
-            </h3>
+            <h3>Recent Children</h3>
 
             <p>
               Latest registered child records
@@ -193,10 +165,8 @@ export default function WorkerDashboard() {
           </div>
 
           <button
-            className="secondary"
-            onClick={() =>
-              navigate("/children")
-            }
+            className="view-all-btn"
+            onClick={() => navigate("/children")}
           >
             View All
           </button>
@@ -204,7 +174,7 @@ export default function WorkerDashboard() {
         </div>
 
 
-        <div className="children-list">
+        <div className="worker-children-list">
 
           {children.map((child) => {
 
@@ -216,31 +186,33 @@ export default function WorkerDashboard() {
 
             return (
               <div
-                className="child-row"
+                className="worker-child-row"
                 key={child.id}
               >
 
-                <div className="child-avatar">
+                <div className="worker-child-avatar">
                   {child.name.charAt(0)}
                 </div>
 
-                <div className="child-info">
+
+                <div className="worker-child-info">
 
                   <strong>
                     {child.name}
                   </strong>
 
                   <span>
-                    {child.gender} • {child.center}
+                    {child.gender}
+                    {" • "}
+                    {child.center}
                   </span>
 
                 </div>
 
-                <div className="child-measurement">
 
-                  <span>
-                    Height
-                  </span>
+                <div className="worker-measurement">
+
+                  <span>Height</span>
 
                   <b>
                     {latest?.height ?? "--"} cm
@@ -248,11 +220,10 @@ export default function WorkerDashboard() {
 
                 </div>
 
-                <div className="child-measurement">
 
-                  <span>
-                    Weight
-                  </span>
+                <div className="worker-measurement">
+
+                  <span>Weight</span>
 
                   <b>
                     {latest?.weight ?? "--"} kg
@@ -260,11 +231,10 @@ export default function WorkerDashboard() {
 
                 </div>
 
-                <div className="child-measurement">
 
-                  <span>
-                    BMI
-                  </span>
+                <div className="worker-measurement">
+
+                  <span>BMI</span>
 
                   <b>
                     {bmi ?? "--"}
@@ -274,7 +244,6 @@ export default function WorkerDashboard() {
 
               </div>
             );
-
           })}
 
         </div>
@@ -282,12 +251,14 @@ export default function WorkerDashboard() {
       </div>
 
 
-      {/* INFORMATION */}
-      <div className="info-note">
+      {/* INFO */}
+      <div className="worker-info-note">
 
-        This portal is for child record keeping,
-        growth monitoring, nutrition tracking and
-        follow-up management.
+        <span>
+          This portal is for child record keeping,
+          growth monitoring, nutrition tracking and
+          follow-up management.
+        </span>
 
       </div>
 
