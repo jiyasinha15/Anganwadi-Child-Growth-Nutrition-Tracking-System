@@ -1,0 +1,53 @@
+/* Landing page */
+.lp { min-height: 100dvh; display: flex; flex-direction: column; background:
+  radial-gradient(900px 480px at 85% -10%, rgb(183 205 189 / .55), transparent 60%),
+  radial-gradient(700px 420px at -10% 30%, rgb(246 236 215 / .8), transparent 60%), var(--background); }
+.lp-nav { display: flex; justify-content: space-between; align-items: center; height: 76px; width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 48px); }
+.lp > main { flex: 1; }
+.lp-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 72px); align-items: center; width: 100%; max-width: 1280px; margin: 0 auto; padding: clamp(8px, 3vw, 40px) clamp(16px, 5vw, 48px) 56px; }
+.lp-copy { display: grid; gap: 20px; justify-items: start; }
+.lp-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-caption); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--primary); }
+.lp-eyebrow::before { content: ""; width: 24px; height: 2px; background: var(--primary); border-radius: 2px; }
+.lp-sub { font-size: 1.125rem; color: var(--text-secondary); max-width: 48ch; line-height: 1.6; }
+.lp-entry { display: grid; gap: 12px; width: 100%; max-width: 540px; margin-top: 4px; }
+.lp-card { position: relative; display: flex; align-items: center; gap: 16px; padding: 18px; background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: var(--r-lg); color: var(--text); box-shadow: var(--shadow-sm); transition: transform .22s var(--ease-out), box-shadow .22s var(--ease-out), border-color .2s; }
+.lp-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+.lp-card:active { transform: translateY(-1px); }
+.lp-card-icon { flex: none; display: grid; place-items: center; width: 46px; height: 46px; border-radius: var(--r-md); background: var(--grad-primary); color: #fff; box-shadow: 0 6px 14px -4px rgb(11 93 70 / .5); }
+.lp-card.alt .lp-card-icon { background: linear-gradient(135deg, #8a6a2a, #b88a3e); box-shadow: 0 6px 14px -4px rgb(184 138 62 / .5); }
+.lp-card-text { display: grid; flex: 1; gap: 2px; } .lp-card-text b { font-size: var(--fs-h2); } .lp-card-text small { color: var(--text-secondary); font-size: var(--fs-small); line-height: 1.45; }
+.lp-arrow { color: var(--text-muted); transition: transform .2s var(--ease-out), color .2s; } .lp-card:hover .lp-arrow { transform: translateX(4px); color: var(--primary); }
+.lp-visual { position: relative; } .lp-visual::before { content: ""; position: absolute; inset: 6% 2% 0; border-radius: 32px; background: linear-gradient(160deg, rgb(255 254 250 / .9), rgb(234 241 234 / .6)); border: 1px solid rgb(205 202 187 / .6); box-shadow: var(--shadow-md); }
+.ill { position: relative; width: 100%; height: auto; display: block; }
+
+/* Illustration motion: entrance only, plus a very slow sun drift */
+.ill-curve { stroke-dasharray: 620; stroke-dashoffset: 620; animation: ill-draw 1.6s var(--ease-out) .3s forwards; }
+.ill-kid { transform-box: fill-box; transform-origin: 50% 100%; opacity: 0; animation: ill-grow .7s var(--ease-out) forwards; }
+.ill-dot { opacity: 0; transform-box: fill-box; transform-origin: center; animation: ill-pop .5s var(--ease-out) forwards; }
+.ill-sun { animation: ill-drift 9s ease-in-out infinite alternate; }
+.ill-leaf { transform-box: fill-box; transform-origin: 0% 100%; animation: ill-sway 6s ease-in-out infinite alternate; }
+@keyframes ill-draw { to { stroke-dashoffset: 0; } }
+@keyframes ill-grow { from { opacity: 0; transform: scaleY(.2); } to { opacity: 1; transform: none; } }
+@keyframes ill-pop { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+@keyframes ill-drift { to { transform: translate(-6px, 6px); } }
+@keyframes ill-sway { to { transform: rotate(3deg); } }
+
+/* Mission + steps */
+.lp-mission { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 48px); }
+.lp-mission blockquote { margin: 0; padding: clamp(28px, 5vw, 56px); border-radius: var(--r-xl); background: var(--grad-hero); color: #e6f2ea; position: relative; overflow: hidden; }
+.lp-mission blockquote::after { content: ""; position: absolute; right: -60px; top: -80px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgb(255 255 255 / .14), transparent 70%); }
+.lp-mission p { position: relative; max-width: 60ch; font-family: var(--font-display); font-size: clamp(1.25rem, 1rem + 1.2vw, 1.875rem); line-height: 1.4; font-weight: 500; }
+.lp-mission em { font-style: italic; color: #f1dfb3; }
+.lp-steps { max-width: 1280px; margin: 0 auto; padding: clamp(40px, 6vw, 72px) clamp(16px, 5vw, 48px); }
+.lp-h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.5rem, 1.2rem + 1vw, 2.125rem); color: var(--primary-dark); margin-bottom: 24px; letter-spacing: -0.01em; }
+.lp-step-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.lp-step { padding: 22px; border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: transform .22s var(--ease-out), box-shadow .22s; animation: lp-rise .6s var(--ease-out) both; animation-delay: calc(var(--i) * .08s); }
+.lp-step:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.lp-step b { display: block; margin: 14px 0 4px; font-size: var(--fs-h2); } .lp-step p { color: var(--text-secondary); font-size: var(--fs-small); line-height: 1.55; }
+.lp-step-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--r-md); background: var(--primary-soft); color: var(--primary); }
+@keyframes lp-rise { from { opacity: 0; transform: translateY(14px); } }
+.lp-foot { display: flex; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; max-width: 1280px; width: 100%; margin: 0 auto; padding: 20px clamp(16px, 5vw, 48px) 28px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: var(--fs-caption); }
+
+@media (max-width: 960px) { .lp-step-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 860px) { .lp-hero { grid-template-columns: 1fr; } .lp-visual { order: -1; max-width: 480px; } }
+@media (max-width: 520px) { .lp-step-grid { grid-template-columns: 1fr; } .lp-nav .demo-pill span { display: none; } }

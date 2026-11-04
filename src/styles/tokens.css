@@ -1,0 +1,56 @@
+:root {
+  /* Brand: deep emerald, soft sage, warm ivory */
+  --primary: #0b5d46;
+  --primary-dark: #073f31;
+  --primary-soft: #e0eee6;
+  --primary-bright: #14805f;
+  --sage: #b7cdbd;
+  --sage-soft: #eaf1ea;
+  --mint: #f0f6f1;
+  --gold: #b88a3e;
+  --gold-soft: #f6ecd7;
+  /* Surfaces */
+  --background: #f7f4ec;
+  --surface: #fffefa;
+  --surface-elevated: #ffffff;
+  --surface-sunken: #f0ede3;
+  --glass: rgb(255 254 250 / 0.72);
+  /* Text */
+  --text: #17231e;
+  --text-secondary: #55645c;
+  --text-muted: #85928a;
+  --border: #e4e1d4;
+  --border-strong: #cdcabb;
+  /* Semantic */
+  --success: #0f7b4f;  --success-soft: #e0f3ea;
+  --warning: #a65f00;  --warning-soft: #fdf0d8;
+  --danger: #b42318;   --danger-soft: #fde8e6;
+  --info: #1d5fb8;     --info-soft: #e4eefb;
+  --insight: #6b3fb5;  --insight-soft: #efe8fa;
+  /* Gradients: used for hero surfaces and primary actions only */
+  --grad-primary: linear-gradient(135deg, #0b5d46 0%, #0f7455 100%);
+  --grad-hero: linear-gradient(135deg, #073f31 0%, #0b5d46 52%, #2f8a69 100%);
+  --grad-ivory: linear-gradient(180deg, #fbf8f0 0%, #f4f0e4 100%);
+  /* Type */
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --fs-display: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
+  --fs-h1: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  --fs-h2: 1.0625rem;
+  --fs-h3: 0.9375rem;
+  --fs-body: 0.875rem;
+  --fs-small: 0.8125rem;
+  --fs-caption: 0.75rem;
+  --fs-metric: clamp(1.625rem, 1.4rem + 0.7vw, 2.125rem);
+  /* Shape & depth */
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px;
+  --shadow-sm: 0 1px 2px rgb(23 35 30 / 0.04), 0 1px 1px rgb(23 35 30 / 0.03);
+  --shadow-md: 0 6px 18px -6px rgb(11 93 70 / 0.16), 0 2px 6px rgb(23 35 30 / 0.05);
+  --shadow-lg: 0 24px 48px -16px rgb(7 63 49 / 0.28), 0 6px 16px rgb(23 35 30 / 0.08);
+  --ring: 0 0 0 3px rgb(11 93 70 / 0.16);
+  /* Layout */
+  --sidebar-w: 248px; --sidebar-w-collapsed: 68px; --topbar-h: 60px; --bottomnav-h: 60px;
+  --content-max: 1360px;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
